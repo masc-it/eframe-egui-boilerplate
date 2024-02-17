@@ -1,0 +1,31 @@
+[package]
+name = "eframe_template"
+version = "0.1.0"
+authors = ["Mauro Sciancalepore <mauroscianca98@gmail.com>"]
+edition = "2021"
+
+
+[dependencies]
+egui = "0.26.0"
+wgpu = "0.19.0"
+eframe = { version = "0.26.0", default-features = false, features = [
+    "default_fonts", # Embed the default egui fonts.
+    "wgpu",          # Use the glow rendering backend. Alternative: "wgpu".
+] }
+
+log = "0.4"
+tokio = { version = "1.36.0", features = ["full"] }
+tokio-stream = "0.1.14"
+flume = { version = "0.11", default-features = false, features = ["async"] }
+# You only need serde if you want app persistence:
+serde = { version = "1", features = ["derive"] }
+sync_cow = "0.1.1"
+env_logger = "0.10"
+async-process = "2.0.1"
+
+[profile.release]
+opt-level = 2 # fast and small wasm
+
+# Optimize all dependencies even in debug builds:
+[profile.dev.package."*"]
+opt-level = 2
